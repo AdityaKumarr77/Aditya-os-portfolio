@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { TerminalSquare, X } from "lucide-react";
+import { X } from "lucide-react";
 import { personalInfo, projects, skills, socialLinks } from "@/data/portfolio";
+import { useDialog } from "@/lib/useDialog";
 
 type Line = { text: string; kind?: "cmd" | "out" };
 
@@ -84,6 +85,7 @@ export default function Terminal() {
   ]);
   const inputRef = useRef<HTMLInputElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useDialog({ open, onClose: () => setOpen(false) });
 
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 150);
@@ -133,6 +135,11 @@ export default function Terminal() {
             className="fixed inset-0 z-99 flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm p-0 sm:p-6"
           >
             <motion.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Portfolio assistant terminal"
+              tabIndex={-1}
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 16 }}
@@ -151,7 +158,12 @@ export default function Terminal() {
                 </button>
               </div>
 
-              <div className="h-[60vh] max-h-72 sm:h-64 overflow-y-auto px-3 py-2.5 sm:px-4 sm:py-3 space-y-1">
+              <div
+                role="log"
+                aria-live="polite"
+                aria-label="Terminal output"
+                className="h-[60vh] max-h-72 sm:h-64 overflow-y-auto px-3 py-2.5 sm:px-4 sm:py-3 space-y-1"
+              >
                 {lines.map((l, i) => (
                   <p
                     key={i}

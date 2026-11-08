@@ -5,18 +5,20 @@ import { internships } from "@/data/portfolio";
 import SectionLabel from "./SectionLabel";
 import SectionGlow from "./SectionGlow";
 import ImagePreviewModal, { type ImagePreview } from "./ImagePreviewModal";
+import { thumbnailSrc } from "@/lib/images";
 
 export default function Internships() {
   const [selected, setSelected] = useState<ImagePreview | null>(null);
 
   return (
-    <section id="internships" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
+    <section id="internships" aria-labelledby="section-08-title" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
       <SectionGlow position="top-left" color="amber" />
       <SectionLabel
         index="08"
         module="Experience Log"
         title="Internships"
         description="Click a preview to view the certificate at full size."
+        id="section-08-title"
       />
 
       <div className="space-y-4">
@@ -76,9 +78,10 @@ export default function Internships() {
               className="group relative w-full sm:w-28 lg:w-32 aspect-[4/3] rounded-xl overflow-hidden border border-[var(--color-line)] bg-[var(--color-surface-2)] shrink-0"
             >
               <img
-                src={intern.image}
-                alt={`${intern.organization} certificate`}
+                src={thumbnailSrc(intern.image)}
+                alt=""
                 loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).style.opacity = "0";

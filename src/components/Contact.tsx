@@ -18,9 +18,9 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
+    <section id="contact" aria-labelledby="section-09-title" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
       <SectionGlow position="bottom-right" color="signal" />
-      <SectionLabel index="09" module="Communication Uplink" title="Open Connection" description="Have an idea? Let's build something." />
+      <SectionLabel index="09" module="Communication Uplink" title="Open Connection" description="Have an idea? Let's build something." id="section-09-title" />
 
       <div className="grid lg:grid-cols-[1fr_1.1fr] gap-8">
         <div className="space-y-4">
@@ -69,6 +69,8 @@ export default function Contact() {
             <span className="label block mb-1.5">Your Name</span>
             <input
               required
+              name="name"
+              autoComplete="name"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full bg-[var(--color-surface-2)] border border-[var(--color-line)] rounded-lg px-3.5 py-2.5 text-sm font-body text-[var(--color-text)] focus:border-[var(--color-signal)] outline-none transition-colors"
@@ -81,6 +83,9 @@ export default function Contact() {
             <input
               required
               type="email"
+              name="email"
+              autoComplete="email"
+              inputMode="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full bg-[var(--color-surface-2)] border border-[var(--color-line)] rounded-lg px-3.5 py-2.5 text-sm font-body text-[var(--color-text)] focus:border-[var(--color-signal)] outline-none transition-colors"
@@ -92,6 +97,8 @@ export default function Contact() {
             <span className="label block mb-1.5">Message</span>
             <textarea
               required
+              name="message"
+              autoComplete="off"
               rows={4}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -108,7 +115,7 @@ export default function Contact() {
           </button>
 
           {sent && (
-            <p className="mt-3 text-[11px] text-[var(--color-signal)] text-center">
+            <p role="status" aria-live="polite" className="mt-3 text-[11px] text-[var(--color-signal)] text-center">
               Your email client should now be open with the message ready to send.
             </p>
           )}

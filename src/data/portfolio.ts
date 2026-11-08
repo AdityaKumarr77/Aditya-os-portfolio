@@ -1,7 +1,6 @@
 // ============================================================================
 // ADITYA.OS — CENTRAL CONTENT CONFIGURATION
 // Edit this file to update anything on the site. No component code required.
-// Values wrapped in [ADD ...] are placeholders — replace with real data.
 // ============================================================================
 
 export const personalInfo = {
@@ -170,11 +169,11 @@ export const projects: Project[] = [
   {
     number: "04",
     name: "CODXO Internship Project",
-    description: "A real-world development project completed during the CODXO internship.",
-    problem: "[ADD PROBLEM STATEMENT]",
-    approach: "[ADD APPROACH DETAILS]",
+    description: "A development project completed as part of the CODXO software development internship.",
+    problem: "The internship required delivering a working software project to a defined brief within a fixed timeframe.",
+    approach: "Worked from the internship brief through planning, implementation and review, using version control to iterate on the project as requirements were clarified.",
     stack: ["JavaScript"],
-    features: ["Built to real internship requirements", "Collaborated with a development team"],
+    features: ["Built against an internship brief", "Version-controlled development workflow"],
     githubUrl: "https://github.com/technical-aditya-rathore/CODXO-project",
   },
 ];

@@ -59,7 +59,10 @@ function SkillIcon({ name }: { name: string }) {
       alt=""
       aria-hidden="true"
       className="skill-icon"
+      width={24}
+      height={24}
       loading="lazy"
+      referrerPolicy="no-referrer"
       onError={() => setFailed(true)}
     />
   );
@@ -67,13 +70,14 @@ function SkillIcon({ name }: { name: string }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
+    <section id="skills" aria-labelledby="section-02-title" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
       <SectionGlow position="top-left" color="violet" />
       <SectionLabel
         index="02"
         module="Skill Ecosystem"
         title="Skills"
         description="A structured view of the languages, platforms and disciplines behind my work."
+        id="section-02-title"
       />
       <div className="skill-field">
         {skillGroups.map((group, i) => (

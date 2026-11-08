@@ -62,6 +62,10 @@ export default function BootScreen({ onDone }: { onDone: () => void }) {
           style={{ pointerEvents: exiting ? "none" : "auto" }}
           aria-hidden={exiting}
         >
+          <p className="sr-only" role="status">
+            Loading portfolio
+          </p>
+
           <button
             onClick={skip}
             className="absolute top-6 right-6 text-[11px] tracking-widest text-[var(--color-text-faint)] hover:text-[var(--color-signal)] transition-colors uppercase border border-[var(--color-line)] rounded-full px-3 py-1.5"
@@ -69,7 +73,7 @@ export default function BootScreen({ onDone }: { onDone: () => void }) {
             Skip →
           </button>
 
-          <div className="w-[min(90vw,420px)] text-left">
+          <div aria-hidden="true" className="w-[min(90vw,420px)] text-left">
             <p className="text-[var(--color-signal)] text-sm tracking-widest mb-6">
               INITIALIZING ADITYA.OS
               <span className="animate-blink">_</span>

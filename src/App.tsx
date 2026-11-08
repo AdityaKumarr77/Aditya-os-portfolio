@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import BootScreen from "@/components/BootScreen";
 import { ScrollProgressBar } from "@/components/HUD";
 import Nav from "@/components/Nav";
@@ -13,12 +13,21 @@ import Hackathons from "@/components/Hackathons";
 import Internships from "@/components/Internships";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Terminal from "@/components/Terminal";
+
+const Terminal = lazy(() => import("@/components/Terminal"));
+
+const isBrowser = typeof window !== "undefined";
 
 export default function App() {
-  const [booted, setBooted] = useState(false);
-  const [isDay, setIsDay] = useState(() => localStorage.getItem("aditya-theme") === "day");
-  const [accent, setAccent] = useState(() => localStorage.getItem("aditya-accent") || "gold");
+  // During prerendering there is no browser, so skip the boot animation and
+  // render the full page into the static HTML snapshot.
+  const [booted, setBooted] = useState(() => !isBrowser);
+  const [isDay, setIsDay] = useState(
+    () => isBrowser && localStorage.getItem("aditya-theme") === "day",
+  );
+  const [accent, setAccent] = useState(
+    () => (isBrowser && localStorage.getItem("aditya-accent")) || "gold",
+  );
 
   useEffect(() => {
     document.documentElement.dataset.theme = isDay ? "day" : "night";
@@ -28,18 +37,32 @@ export default function App() {
   }, [accent, isDay]);
 
   useEffect(() => {
-    const updateGlow = (x: number, y: number) => {
-      document.documentElement.style.setProperty("--pointer-x", `${x}px`);
-      document.documentElement.style.setProperty("--pointer-y", `${y}px`);
+    let frame = 0;
+    let nextX = 0;
+    let nextY = 0;
+
+    const applyGlow = () => {
+      frame = 0;
+      document.documentElement.style.setProperty("--pointer-x", `${nextX}px`);
+      document.documentElement.style.setProperty("--pointer-y", `${nextY}px`);
     };
-    const onPointerMove = (event: PointerEvent) => updateGlow(event.clientX, event.clientY);
+
+    const queueGlow = (x: number, y: number) => {
+      nextX = x;
+      nextY = y;
+      if (frame === 0) frame = window.requestAnimationFrame(applyGlow);
+    };
+
+    const onPointerMove = (event: PointerEvent) => queueGlow(event.clientX, event.clientY);
     const onTouchStart = (event: TouchEvent) => {
       const touch = event.touches[0];
-      if (touch) updateGlow(touch.clientX, touch.clientY);
+      if (touch) queueGlow(touch.clientX, touch.clientY);
     };
+
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("touchstart", onTouchStart, { passive: true });
     return () => {
+      if (frame !== 0) window.cancelAnimationFrame(frame);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("touchstart", onTouchStart);
     };
@@ -47,41 +70,42 @@ export default function App() {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       {!booted && <BootScreen onDone={() => setBooted(true)} />}
 
-      <div
-        style={{
-          opacity: booted ? 1 : 0,
-          transition: "opacity 0.5s ease",
-        }}
-      >
-        <div className="grain" />
-        <div className="neon-field" aria-hidden="true" />
-        <ScrollProgressBar />
-        <div className="touch-glow" aria-hidden="true" />
-        <Nav
-          isDay={isDay}
-          onThemeToggle={() => setIsDay((current) => !current)}
-          accent={accent}
-          onAccentChange={setAccent}
-        />
+      <div className="grain" aria-hidden="true" />
+      <div className="neon-field" aria-hidden="true" />
+      <ScrollProgressBar />
+      <div className="touch-glow" aria-hidden="true" />
+      <Nav
+        isDay={isDay}
+        onThemeToggle={() => setIsDay((current) => !current)}
+        accent={accent}
+        onAccentChange={setAccent}
+      />
 
-        <main>
-          <Hero />
-          <About />
-          <Skills />
-          <Deployments />
-          <Projects />
-          <Certificates />
-          <AmbassadorRoles />
-          <Hackathons />
-          <Internships />
-          <Contact />
-        </main>
+      <main id="main-content" tabIndex={-1}>
+        <Hero />
+        <About />
+        <Skills />
+        <Deployments />
+        <Projects />
+        <Certificates />
+        <AmbassadorRoles />
+        <Hackathons />
+        <Internships />
+        <Contact />
+      </main>
 
-        <Footer />
-        <Terminal />
-      </div>
+      <Footer />
+      {isBrowser && (
+        <Suspense fallback={null}>
+          <Terminal />
+        </Suspense>
+      )}
     </>
   );
 }

@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, Menu, Moon, Palette, Settings2, Sun, X } from "lucide-react";
+import { Menu, Moon, Palette, Settings2, Sun, X } from "lucide-react";
 import { navItems, personalInfo } from "@/data/portfolio";
 import { useActiveSection } from "@/lib/hooks";
+import { useDialog } from "@/lib/useDialog";
 
 interface NavProps {
   isDay: boolean;
@@ -31,18 +32,15 @@ const accentOptions = [
 ];
 
 export default function Nav({ isDay, onThemeToggle, accent, onAccentChange }: NavProps) {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const settingsRef = useRef<HTMLDivElement>(null);
-  const active = useActiveSection(navItems.map((n) => n.href.replace("#", "")));
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const sectionIds = useMemo(() => navItems.map((n) => n.href.replace("#", "")), []);
+  const active = useActiveSection(sectionIds);
+  const mobileDialogRef = useDialog({
+    open: mobileOpen,
+    onClose: () => setMobileOpen(false),
+  });
 
   useEffect(() => {
     const closeOnOutsideClick = (event: MouseEvent) => {
@@ -52,13 +50,21 @@ export default function Nav({ isDay, onThemeToggle, accent, onAccentChange }: Na
     return () => document.removeEventListener("mousedown", closeOnOutsideClick);
   }, []);
 
+  useEffect(() => {
+    if (!settingsOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSettingsOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [settingsOpen]);
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-80 flex justify-center px-2 sm:px-6">
         <nav
-          className={`w-full flex items-center justify-between rounded-full glow-border glass transition-all duration-300 ${
-            scrolled ? "mt-3 max-w-5xl px-4 py-2" : "mt-5 max-w-[1350px] px-4 sm:px-5 py-3"
-          }`}
+          aria-label="Primary"
+          className="w-full max-w-[1350px] flex items-center justify-between rounded-full glow-border glass px-4 sm:px-5 py-3 mt-5"
           style={{
             background: isDay
               ? "linear-gradient(135deg, rgba(255,255,255,0.96), rgba(232,239,236,0.9))"
@@ -74,14 +80,15 @@ export default function Nav({ isDay, onThemeToggle, accent, onAccentChange }: Na
             ADITYA<span className="signal-text">.OS</span>
           </a>
 
-          <ul className="hidden lg:flex items-center gap-1 font-mono text-[11px] tracking-wider uppercase">
+          <ul className="hidden lg:flex items-center gap-0.5 xl:gap-1 font-mono text-[10px] xl:text-[11px] tracking-wider uppercase">
             {navItems.map((item) => {
               const isActive = active === item.href.replace("#", "");
               return (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className={`px-3 py-1.5 rounded-full transition-colors block ${
+                    aria-current={isActive ? "location" : undefined}
+                    className={`px-1.5 xl:px-3 py-1.5 rounded-full transition-colors block ${
                       isActive
                         ? "text-[var(--color-ink)] bg-[var(--color-signal)]"
                         : "text-[var(--color-text-dim)] hover:text-[var(--color-text)]"
@@ -101,6 +108,7 @@ export default function Nav({ isDay, onThemeToggle, accent, onAccentChange }: Na
                 aria-label="Open system settings"
                 aria-expanded={settingsOpen}
                 aria-controls="top-system-settings"
+                aria-haspopup="dialog"
                 title="System settings"
                 className="settings-trigger w-9 h-9 rounded-full border border-[var(--color-line)] flex items-center justify-center text-[var(--color-text-dim)] transition-colors"
               >
@@ -110,6 +118,8 @@ export default function Nav({ isDay, onThemeToggle, accent, onAccentChange }: Na
                 {settingsOpen && (
                   <motion.div
                     id="top-system-settings"
+                    role="dialog"
+                    aria-label="System settings"
                     initial={{ opacity: 0, y: -8, scale: 0.96 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -8, scale: 0.96 }}
@@ -169,21 +179,29 @@ export default function Nav({ isDay, onThemeToggle, accent, onAccentChange }: Na
             >
               Resume
             </a>
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden p-2 text-[var(--color-text)]"
+              aria-label="Open menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
+              aria-haspopup="dialog"
+            >
+              <Menu size={20} />
+            </button>
           </div>
-
-          <button
-            onClick={() => setMobileOpen(true)}
-            className="lg:hidden p-2 text-[var(--color-text)]"
-            aria-label="Open menu"
-          >
-            <Menu size={20} />
-          </button>
         </nav>
       </header>
 
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            ref={mobileDialogRef}
+            id="mobile-navigation"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation"
+            tabIndex={-1}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -213,6 +231,7 @@ export default function Nav({ isDay, onThemeToggle, accent, onAccentChange }: Na
                   <a
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
+                    aria-current={active === item.href.replace("#", "") ? "location" : undefined}
                     className="flex items-baseline gap-3 py-3 text-3xl font-medium text-[var(--color-text)] hover:text-[var(--color-signal)] transition-colors"
                   >
                     <span className="font-mono text-xs text-[var(--color-text-faint)]">

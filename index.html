@@ -2,24 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b0d0f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#eef6f4" media="(prefers-color-scheme: light)" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="canonical" href="https://aditya-os-portfolio.vercel.app/" />
+
     <title>Aditya Kumar Jha — Developer | Data | AI | Web</title>
     <meta
       name="description"
       content="Aditya Kumar Jha — Computer Science & Engineering student and full-stack developer building in web development, data analytics and AI/ML. Explore projects, deployments, certifications and experience."
     />
+    <meta
+      name="keywords"
+      content="Aditya Kumar Jha, full-stack developer, web developer, data analyst, AI ML, React, Python, portfolio, Ranchi, Jharkhand, India"
+    />
     <meta name="author" content="Aditya Kumar Jha" />
-    <meta name="theme-color" content="#07080a" />
+    <meta name="application-name" content="ADITYA.OS" />
+    <meta name="apple-mobile-web-app-title" content="ADITYA.OS" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aditya Kumar Jha" />
+    <meta property="og:locale" content="en_IN" />
     <meta property="og:title" content="Aditya Kumar Jha — Developer | Data | AI | Web" />
     <meta
       property="og:description"
       content="Computer Science & Engineering student and full-stack developer. Explore projects, deployments, certifications and experience."
     />
-    <meta property="og:image" content="/og-cover.svg" />
-    <meta property="og:url" content="https://adityakumarjha.dev" />
+    <meta property="og:url" content="https://aditya-os-portfolio.vercel.app/" />
+    <meta property="og:image" content="https://aditya-os-portfolio.vercel.app/og-cover.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Aditya Kumar Jha — Developer, Data, AI, Builder"
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Aditya Kumar Jha — Developer | Data | AI | Web" />
@@ -27,20 +51,77 @@
       name="twitter:description"
       content="Computer Science & Engineering student and full-stack developer. Explore projects, deployments, certifications and experience."
     />
-    <meta name="twitter:image" content="/og-cover.svg" />
+    <meta name="twitter:image" content="https://aditya-os-portfolio.vercel.app/og-cover.png" />
+    <meta
+      name="twitter:image:alt"
+      content="Aditya Kumar Jha — Developer, Data, AI, Builder"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/images/profile.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Aditya Kumar Jha",
-        "jobTitle": "Computer Science & Engineering Student",
-        "url": "https://adityakumarjha.dev",
-        "sameAs": [
-          "https://www.linkedin.com/in/adityakumarjha999",
-          "https://github.com/technical-aditya-rathore",
-          "https://unstop.com/u/technadi29148"
-          "https://leetcode.com/u/technical-aditya-rathore/",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://aditya-os-portfolio.vercel.app/#website",
+            "url": "https://aditya-os-portfolio.vercel.app/",
+            "name": "Aditya Kumar Jha",
+            "description": "Personal portfolio of Aditya Kumar Jha — Computer Science & Engineering student and full-stack developer working across web development, data analytics and AI/ML.",
+            "inLanguage": "en",
+            "publisher": { "@id": "https://aditya-os-portfolio.vercel.app/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://aditya-os-portfolio.vercel.app/#person",
+            "name": "Aditya Kumar Jha",
+            "jobTitle": "Computer Science & Engineering Student",
+            "description": "Computer Science & Engineering student and full-stack developer working across web development, data analytics and AI/ML.",
+            "url": "https://aditya-os-portfolio.vercel.app/",
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://aditya-os-portfolio.vercel.app/images/profile.webp",
+              "width": 840,
+              "height": 1112
+            },
+            "email": "mailto:adityakumarjha232@gmail.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Ranchi",
+              "addressRegion": "Jharkhand",
+              "addressCountry": "IN"
+            },
+            "sameAs": [
+              "https://www.linkedin.com/in/adityakumarjha999",
+              "https://github.com/technical-aditya-rathore",
+              "https://unstop.com/u/technadi29148",
+              "https://leetcode.com/u/technical-aditya-rathore/",
+              "https://www.instagram.com/devilbuoy757/"
+            ],
+            "knowsAbout": [
+              "Web Development",
+              "Full-Stack Development",
+              "Data Analytics",
+              "Artificial Intelligence",
+              "Machine Learning",
+              "React",
+              "Python",
+              "SQL"
+            ]
+          }
         ]
       }
     </script>

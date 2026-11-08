@@ -62,7 +62,9 @@ export function useBattery(): { level: number | null; charging: boolean; support
 }
 
 export function useOnlineStatus(): boolean {
-  const [online, setOnline] = useState(navigator.onLine);
+  const [online, setOnline] = useState(
+    () => typeof navigator === "undefined" || navigator.onLine,
+  );
   useEffect(() => {
     const goOnline = () => setOnline(true);
     const goOffline = () => setOnline(false);

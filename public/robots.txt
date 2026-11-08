@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adityakumarjha.dev/sitemap.xml
+Sitemap: https://aditya-os-portfolio.vercel.app/sitemap.xml

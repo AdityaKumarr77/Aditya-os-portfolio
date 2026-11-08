@@ -1,5 +1,7 @@
+import { useId } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { useDialog } from "@/lib/useDialog";
 
 export default function LegalModal({
   title,
@@ -12,10 +14,18 @@ export default function LegalModal({
   onClose: () => void;
   children: React.ReactNode;
 }) {
+  const titleId = useId();
+  const dialogRef = useDialog({ open, onClose });
+
   return (
     <AnimatePresence>
       {open && (
         <motion.div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          tabIndex={-1}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -30,7 +40,7 @@ export default function LegalModal({
             className="w-full sm:max-w-xl max-h-[85vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-[var(--color-surface)] border border-[var(--color-line)] p-7 sm:p-9"
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="font-display font-semibold text-2xl">{title}</h3>
+              <h3 id={titleId} className="font-display font-semibold text-2xl">{title}</h3>
               <button
                 onClick={onClose}
                 aria-label="Close"

@@ -5,11 +5,13 @@ export default function SectionLabel({
   module,
   title,
   description,
+  id,
 }: {
   index: string;
   module: string;
   title: string;
   description?: string;
+  id?: string;
 }) {
   return (
     <motion.div
@@ -24,7 +26,7 @@ export default function SectionLabel({
         <span className="w-4 h-px bg-[var(--color-line)]" />
         {module}
       </p>
-      <h2 className="font-display font-semibold tracking-tight text-3xl sm:text-4xl lg:text-5xl">
+      <h2 id={id} className="font-display font-semibold tracking-tight text-3xl sm:text-4xl lg:text-5xl">
         {title}
       </h2>
       {description && (

@@ -13,13 +13,14 @@ const statusColor: Record<string, string> = {
 
 export default function Deployments() {
   return (
-    <section id="deployments" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
+    <section id="deployments" aria-labelledby="section-03-title" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
       <SectionGlow position="top-right" color="signal" />
       <SectionLabel
         index="03"
         module="Deployment Monitor"
         title="Deployments"
         description="Projects currently shipped and reachable outside this page."
+        id="section-03-title"
       />
 
       <div className="card overflow-hidden">
@@ -58,6 +59,7 @@ export default function Deployments() {
             </div>
             <div className="flex items-center gap-1.5 font-mono text-xs" style={{ color: statusColor[d.status] }}>
               <span
+                aria-hidden="true"
                 className="w-1.5 h-1.5 rounded-full animate-blink"
                 style={{ background: statusColor[d.status] }}
               />

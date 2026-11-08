@@ -24,9 +24,9 @@ const cards = [
 
 export default function About() {
   return (
-    <section id="about" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
+    <section id="about" aria-labelledby="section-01-title" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
       <SectionGlow position="top-right" color="signal" />
-      <SectionLabel index="01" module="Identity Module" title="About" />
+      <SectionLabel index="01" module="Identity Module" title="About" id="section-01-title" />
 
       <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-14">
         <motion.p

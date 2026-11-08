@@ -6,10 +6,12 @@ export default function Hero() {
   return (
     <section
       id="home"
+      aria-labelledby="hero-title"
       className="relative min-h-[100svh] flex items-center pt-32 pb-20 px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 overflow-hidden"
     >
       {/* ambient backdrop */}
       <div
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
         style={{
           background:
@@ -17,6 +19,7 @@ export default function Hero() {
         }}
       />
       <div
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 opacity-[0.05]"
         style={{
           backgroundImage:
@@ -33,11 +36,12 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 rounded-full border border-[var(--color-line)] px-3 py-1.5 mb-7 font-mono text-[11px] tracking-widest text-[var(--color-signal)]"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-signal)] animate-blink" />
+            <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-[var(--color-signal)] animate-blink" />
             {personalInfo.status}
           </motion.div>
 
           <motion.h1
+            id="hero-title"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.08 }}
@@ -116,7 +120,12 @@ export default function Hero() {
             <div className="relative rounded-[27px] bg-[var(--color-surface)] overflow-hidden aspect-[4/5]">
               <img
                 src={personalInfo.photoPath}
-                alt={personalInfo.name}
+                alt={`${personalInfo.name} — profile photo`}
+                width={840}
+                height={1112}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 data-cursor="image"
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -135,10 +144,10 @@ export default function Hero() {
                 {personalInfo.initials}
               </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)] via-transparent to-transparent opacity-70" />
+              <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[var(--color-ink)] via-transparent to-transparent opacity-70" />
 
               {/* scan line */}
-              <div className="absolute left-0 right-0 h-16 opacity-20 pointer-events-none"
+              <div aria-hidden="true" className="absolute left-0 right-0 h-16 opacity-20 pointer-events-none"
                 style={{
                   background: "linear-gradient(180deg, transparent, var(--color-signal), transparent)",
                   animation: "scanY 3.2s ease-in-out infinite",
@@ -153,19 +162,11 @@ export default function Hero() {
             <p className="mt-1">ROLE: BUILDER</p>
           </div>
           <div className="absolute -top-4 -right-4 glass rounded-full px-3 py-1.5 font-mono text-[10px] tracking-widest text-[var(--color-signal)] flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-signal)]" />
+            <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-[var(--color-signal)]" />
             VERIFIED
           </div>
         </motion.div>
       </div>
-
-      <style>{`
-        @keyframes scanY {
-          0% { top: -10%; }
-          50% { top: 100%; }
-          100% { top: -10%; }
-        }
-      `}</style>
     </section>
   );
 }

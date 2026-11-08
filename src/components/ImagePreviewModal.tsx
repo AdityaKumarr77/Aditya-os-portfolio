@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { useDialog } from "@/lib/useDialog";
 
 export interface ImagePreview {
   src: string;
@@ -14,10 +15,17 @@ export default function ImagePreviewModal({
   item: ImagePreview | null;
   onClose: () => void;
 }) {
+  const dialogRef = useDialog({ open: Boolean(item), onClose });
+
   return (
     <AnimatePresence>
       {item && (
         <motion.div
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={item.title}
+          tabIndex={-1}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -53,6 +61,7 @@ export default function ImagePreviewModal({
               <img
                 src={item.src}
                 alt={item.title}
+                decoding="async"
                 className="w-full h-auto block"
                 onError={(e) => {
                   const img = e.currentTarget as HTMLImageElement;

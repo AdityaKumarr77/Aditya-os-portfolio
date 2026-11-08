@@ -1,0 +1,35 @@
+{
+  "name": "Aditya Kumar Jha — Developer | Data | AI | Web",
+  "short_name": "ADITYA.OS",
+  "description": "Personal portfolio of Aditya Kumar Jha — Computer Science & Engineering student and full-stack developer working across web development, data analytics and AI/ML.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b0d0f",
+  "theme_color": "#0b0d0f",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["portfolio", "developer", "technology"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

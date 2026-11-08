@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="mb-10 flex justify-center px-10">
           <div className="notification-ring glass w-full max-w-3xl rounded-full px-4 py-3 font-mono text-[10px] tracking-widest text-[var(--color-text-dim)]">
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-              <span className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-[var(--color-signal)] shadow-[0_0_10px_var(--color-signal)] animate-blink" /> ACTIVE</span>
+              <span className="flex items-center gap-2"><span aria-hidden="true" className="w-2 h-2 rounded-full bg-[var(--color-signal)] shadow-[0_0_10px_var(--color-signal)] animate-blink" /> ACTIVE</span>
               <span className="flex items-center gap-2"><BatteryCharging size={14} className="text-[var(--color-signal)]" /> BAT {battery.supported && battery.level !== null ? `${battery.level}%` : "N/A"}</span>
               <span className="flex items-center gap-2"><Wifi size={14} className={online ? "text-[var(--color-signal)]" : "text-[var(--color-rose)]"} /> {online ? "ONLINE" : "OFFLINE"}</span>
               <span className="flex items-center gap-2"><Clock3 size={14} className="text-[var(--color-signal)]" /> {pad(clock.getHours())}:{pad(clock.getMinutes())} IST</span>

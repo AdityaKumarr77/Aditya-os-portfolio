@@ -5,6 +5,7 @@ import { certificates } from "@/data/portfolio";
 import SectionLabel from "./SectionLabel";
 import SectionGlow from "./SectionGlow";
 import ImagePreviewModal, { type ImagePreview } from "./ImagePreviewModal";
+import { thumbnailSrc } from "@/lib/images";
 
 export default function Certificates() {
   const [selected, setSelected] = useState<ImagePreview | null>(null);
@@ -30,7 +31,7 @@ export default function Certificates() {
   };
 
   return (
-    <section id="certificates" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
+    <section id="certificates" aria-labelledby="section-05-title" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
       <SectionGlow position="top-right" color="amber" />
 
       <div className="flex items-end justify-between gap-6 mb-14 lg:mb-16">
@@ -39,6 +40,7 @@ export default function Certificates() {
           module="Credential Archive"
           title="Certificates"
           description="Slide through and click any certificate to view it at full size."
+          id="section-05-title"
         />
         <div className="hidden sm:flex items-center gap-2 shrink-0 pb-1">
           <button
@@ -63,6 +65,10 @@ export default function Certificates() {
       <div
         ref={trackRef}
         onScroll={onScroll}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Certificate archive"
+        tabIndex={0}
         className="flex gap-5 overflow-x-auto pb-4 -mx-6 px-6 sm:mx-0 sm:px-0 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       >
         {certificates.map((c, i) => (
@@ -79,9 +85,10 @@ export default function Certificates() {
           >
             <div className="aspect-[4/3] overflow-hidden bg-[var(--color-surface-2)] relative">
               <img
-                src={c.image}
-                alt={c.title}
+                src={thumbnailSrc(c.image)}
+                alt=""
                 loading="lazy"
+                decoding="async"
                 data-cursor="image"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
@@ -107,18 +114,23 @@ export default function Certificates() {
       </div>
 
       {/* Slide indicators */}
-      <div className="flex items-center justify-center gap-1.5 mt-6">
+      <div className="flex flex-wrap items-center justify-center gap-0 mt-6">
         {certificates.map((c, i) => (
           <button
             key={c.title}
             onClick={() => scrollToIndex(i)}
             aria-label={`Go to certificate ${i + 1}`}
-            className="h-1.5 rounded-full transition-all duration-300"
-            style={{
-              width: active === i ? 22 : 6,
-              background: active === i ? "var(--color-signal)" : "var(--color-line)",
-            }}
-          />
+            aria-current={active === i ? "true" : undefined}
+            className="flex h-6 w-6 items-center justify-center rounded-full"
+          >
+            <span
+              className="h-1.5 rounded-full transition-all duration-300"
+              style={{
+                width: active === i ? 22 : 6,
+                background: active === i ? "var(--color-signal)" : "var(--color-line)",
+              }}
+            />
+          </button>
         ))}
       </div>
 

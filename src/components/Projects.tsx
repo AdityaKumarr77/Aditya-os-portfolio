@@ -1,22 +1,26 @@
-import { useState } from "react";
+import { useId, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, X } from "lucide-react";
 import { projects, type Project } from "@/data/portfolio";
 import SectionLabel from "./SectionLabel";
 import { GithubIcon } from "./BrandIcons";
 import SectionGlow from "./SectionGlow";
+import { useDialog } from "@/lib/useDialog";
 
 export default function Projects() {
   const [selected, setSelected] = useState<Project | null>(null);
+  const titleId = useId();
+  const dialogRef = useDialog({ open: Boolean(selected), onClose: () => setSelected(null) });
 
   return (
-    <section id="projects" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
+    <section id="projects" aria-labelledby="section-04-title" className="relative overflow-hidden px-6 sm:px-10 lg:px-14 xl:px-20 2xl:px-28 py-24 md:py-28 lg:py-32 max-w-[1600px] mx-auto">
       <SectionGlow position="top-left" color="violet" />
       <SectionLabel
         index="04"
         module="Case Studies"
         title="Projects"
         description="Selected work — the problem each one solved and how it was built."
+        id="section-04-title"
       />
 
       <div className="space-y-4">
@@ -73,6 +77,11 @@ export default function Projects() {
             onClick={() => setSelected(null)}
           >
             <motion.div
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+              tabIndex={-1}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
@@ -93,7 +102,7 @@ export default function Projects() {
                 </button>
               </div>
 
-              <h3 className="font-display font-semibold text-3xl tracking-tight mb-6">
+              <h3 id={titleId} className="font-display font-semibold text-3xl tracking-tight mb-6">
                 {selected.name}
               </h3>
 

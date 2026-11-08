@@ -1,5 +1,12 @@
 # ADITYA.OS
 
+<p align="center">
+  <img src="https://img.shields.io/badge/Portfolio-ADITYA.OS-111111?style=for-the-badge&logo=windows&logoColor=white"/>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black"/>
+  <img src="https://img.shields.io/badge/TypeScript-Ready-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Vite-Fast%20Build-646CFF?style=for-the-badge&logo=vite&logoColor=white"/>
+</p>
+
 An interactive, operating-system-inspired personal portfolio for Aditya Kumar Jha.
 
 Live site: https://aditya-os-portfolio.vercel.app/

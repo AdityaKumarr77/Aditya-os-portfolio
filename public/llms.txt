@@ -1,0 +1,55 @@
+# ADITYA.OS
+
+> Personal portfolio of Aditya Kumar Jha, a Computer Science & Engineering student and developer based in Ranchi, Jharkhand, India. His work spans full-stack web development, data analytics, AI/ML, and problem solving.
+
+## Portfolio
+
+- [ADITYA.OS](https://aditya-os-portfolio.vercel.app/): Interactive portfolio and professional profile.
+- [Resume](https://aditya-os-portfolio.vercel.app/Aditya%20Resume.pdf): Downloadable resume.
+
+## About Aditya
+
+- B.Tech Computer Science & Engineering student.
+- Focused on full-stack development, applied AI/ML, and data analytics.
+- Interested in competitive programming, system design, and building useful tools.
+- Available for opportunities.
+
+## Skills
+
+- Languages: C, C++, Java, Python, JavaScript, TypeScript, PHP.
+- Frontend: HTML, CSS, React, Next.js, Tailwind CSS, Bootstrap.
+- Backend: Node.js, Express, Django, FastAPI, Laravel.
+- Databases: MySQL, PostgreSQL, MongoDB, SQLite.
+- Data and AI: SQL, Power BI, data analytics, TensorFlow, and applied AI/ML.
+- Cloud and tools: AWS, GCP, Vercel, Netlify, Docker, Git, GitHub, and GitHub Actions.
+
+## Selected Projects
+
+- [TechPulse Daily](https://github.com/technical-aditya-rathore/TechPulse-Daily): React technology news platform focused on fast scanning, readability, and external API integrations.
+- [Project AstroScope](https://github.com/technical-aditya-rathore/Project-AstroScope-Console-Based-Astrology-App): Python console application using structured, rule-based logic.
+- [Scientific Calculator](https://github.com/technical-aditya-rathore/Scientific-Calculator): Java calculator for advanced mathematical operations and precision-focused computation.
+- [CODXO Internship Project](https://github.com/technical-aditya-rathore/CODXO-project): JavaScript project completed during a software development internship.
+
+## Experience and Activities
+
+- Full Stack Developer Intern at SolFinder Research.
+- Web Development Intern at RV Web.
+- Full Stack Development Intern at InternPe.
+- Software Development Intern at CODXO.
+- Campus Mantri at GeeksforGeeks.
+- Google Student Ambassador through Google Gemini and the PING Network.
+- Campus Ambassador for MyGov.
+- Participant in hackathons organized by ISRO, NIT Patna, IIT Delhi, and Google Developer Groups Ranchi.
+
+## Profiles
+
+- [GitHub](https://github.com/technical-aditya-rathore)
+- [LinkedIn](https://www.linkedin.com/in/adityakumarjha999)
+- [Unstop](https://unstop.com/u/technadi29148)
+- [LeetCode](https://leetcode.com/u/technical-aditya-rathore/)
+- [Instagram](https://www.instagram.com/devilbuoy757/)
+
+## Contact
+
+- Email: [adityakumarjha232@gmail.com](mailto:adityakumarjha232@gmail.com)
+- Location: Ranchi, Jharkhand, India.
